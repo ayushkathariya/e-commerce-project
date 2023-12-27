@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import AvatarCard from "./avatar";
+import AvatarCard from "@/components/avatar";
 import { getAuthSession } from "@/utils/auth";
 import Link from "next/link";
 

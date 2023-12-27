@@ -1,5 +1,5 @@
-import { getAuthSession } from "@/utils/auth";
 import AccessDenied from "@/components/access-denied";
+import { getAuthSession } from "@/utils/auth";
 import { Role } from "@/utils/constants";
 
 export default async function Page() {
