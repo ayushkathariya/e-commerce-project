@@ -1,8 +1,7 @@
-import React from "react";
+import Link from "next/link";
 import { getAuthSession } from "@/utils/auth";
 import SignInButton from "@/components/buttons/signin-button";
 import SignOutButton from "@/components/buttons/signout-button";
-import Link from "next/link";
 
 export default async function Page() {
   const session = await getAuthSession();

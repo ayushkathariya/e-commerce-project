@@ -1,13 +1,19 @@
-import AccessDenied from "@/components/access-denied";
 import { getAuthSession } from "@/utils/auth";
 import { Role } from "@/utils/constants";
+import { Separator } from "@/components/ui/separator";
+import { redirect } from "next/navigation";
 
 export default async function Page() {
   const session = await getAuthSession();
 
   if (session?.user.role !== Role.Admin) {
-    return <AccessDenied />;
+    redirect("/access-denied");
   }
 
-  return <p>Welcome in Admin Page</p>;
+  return (
+    <>
+      <h1>Welcome Admin</h1>
+      <Separator orientation="vertical" className="h-full w-2" />
+    </>
+  );
 }
