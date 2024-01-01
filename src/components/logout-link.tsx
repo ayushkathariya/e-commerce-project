@@ -12,8 +12,8 @@ export default function LogoutLink() {
   return (
     <span onClick={handleLogout}>
       <CommandItem className="cursor-pointer">
-        <ExitIcon className="mr-2 h-4 w-4" />
-        <span>Logout</span>
+        <ExitIcon className="mr-2 h-4 w-4 lg:h-5 lg:w-5 lg:mr-3" />
+        <span className="lg:text-lg font-medium">Logout</span>
       </CommandItem>
     </span>
   );

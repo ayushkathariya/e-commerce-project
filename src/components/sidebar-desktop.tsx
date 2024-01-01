@@ -21,7 +21,7 @@ export default function SideBarDesktop() {
           <h1 className="text-center mt-1 flex items-center gap-1">
             © 2023 All rights reserved. Contact me
             <span>
-              <a target="_blank" href={"https://twitter.com/Ayush44810"}>
+              <a target="_blank" href={process.env.NEXT_PUBLIC_TWITTER_URL!}>
                 <TwitterLogoIcon
                   className="text-blue-500 hover:text-blue-800"
                   width={18}
