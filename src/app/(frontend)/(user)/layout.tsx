@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import ReduxProvider from "@/components/providers/redux-provider";
 import AuthProvider from "@/components/providers/auth-provider";
+import UserLayout from "@/components/user-layout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,12 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <AuthProvider>
-          <ReduxProvider>{children}</ReduxProvider>
+          <ReduxProvider>
+            <div className="px-2 sm:px-5 md:px-8 lg:px-12 mt-1">
+              <UserLayout />
+              <div className="mt-5">{children}</div>
+            </div>
+          </ReduxProvider>
         </AuthProvider>
       </body>
     </html>

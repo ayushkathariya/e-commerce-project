@@ -1,4 +1,4 @@
-import AccessDenied from "@/components/access-denied";
+import AccessDenied from "@/components/admin/access-denied";
 
 export default function Page() {
   return <AccessDenied />;

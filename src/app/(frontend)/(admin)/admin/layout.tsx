@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "@/app/(frontend)/(user)/globals.css";
 import ReduxProvider from "@/components/providers/redux-provider";
 import AuthProvider from "@/components/providers/auth-provider";
-import AdminLayout from "@/components/admin-layout";
+import AdminLayout from "@/components/admin/admin-layout";
 import { getAuthSession } from "@/utils/auth";
 import { Role } from "@/utils/constants";
 import { redirect } from "next/navigation";

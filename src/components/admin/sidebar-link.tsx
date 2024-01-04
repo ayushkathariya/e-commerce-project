@@ -6,7 +6,7 @@ import {
   PersonIcon,
   HomeIcon,
 } from "@radix-ui/react-icons";
-import { Command, CommandItem } from "./ui/command";
+import { Command, CommandItem } from "../ui/command";
 import LogoutLink from "./logout-link";
 
 export default function SidebarLink() {

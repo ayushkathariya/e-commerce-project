@@ -1,7 +1,7 @@
 "use client";
 
 import { ExitIcon } from "@radix-ui/react-icons";
-import { CommandItem } from "./ui/command";
+import { CommandItem } from "../ui/command";
 import { signOut } from "next-auth/react";
 
 export default function LogoutLink() {
