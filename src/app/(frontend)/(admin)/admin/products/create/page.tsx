@@ -4,23 +4,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { toast } from "react-toastify";
 
 export default function Page() {
+  const router = useRouter();
   const [title, setTittle] = useState<string>();
   const [description, setDescription] = useState<string>();
   const [image, setImage] = useState<string>();
   const [price, setPrice] = useState<number>();
   const [quantity, setQuantity] = useState<number>();
-  const [category, setCategory] = useState<number>(2);
+  const [category, setCategory] = useState("");
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const fileInput = e.target;
@@ -39,7 +34,7 @@ export default function Page() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-      await fetch("/api/products", {
+      const res = await fetch("/api/products", {
         method: "POST",
         headers: {
           "Content-Type": "Application/json",
@@ -53,9 +48,13 @@ export default function Page() {
           category,
         }),
       });
-      alert("Created");
+      if (!res.ok) {
+        throw new Error();
+      }
+      toast.success("Product created successfully");
+      router.refresh();
     } catch (error) {
-      alert("Error");
+      toast.error("Something went wrong");
     }
   };
 
@@ -73,6 +72,7 @@ export default function Page() {
             height={300}
             onChange={handleImageChange}
             className="mt-1"
+            required
           />
         </span>
         <span>
@@ -82,6 +82,7 @@ export default function Page() {
             placeholder="Title"
             defaultValue={title}
             onChange={(e) => setTittle(e.target.value)}
+            required
           />
         </span>
         <span>
@@ -90,6 +91,7 @@ export default function Page() {
             placeholder="Description"
             defaultValue={description}
             onChange={(e) => setDescription(e.target.value)}
+            required
           />
         </span>
         <span>
@@ -99,6 +101,7 @@ export default function Page() {
             placeholder="Price"
             defaultValue={price}
             onChange={(e) => setPrice(parseInt(e.target.value))}
+            required
           />
         </span>
         <span>
@@ -108,26 +111,22 @@ export default function Page() {
             placeholder="Quantity"
             defaultValue={quantity}
             onChange={(e) => setQuantity(parseInt(e.target.value))}
+            required
           />
         </span>
         <span>
-          <Select>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Category" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem onChange={() => setCategory(2)} value="mobile">
-                  Mobile
-                </SelectItem>
-                <SelectItem onChange={() => setCategory(1)} value="laptop">
-                  Laptop
-                </SelectItem>
-                {/* <SelectItem value="desktop">Desktop</SelectItem>
-                <SelectItem value="gadgets">Gadgets</SelectItem> */}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <label className="text-sm mb-2 font-semibold block">
+            Select Category:
+          </label>
+          <select
+            className="px-4 py-1 text-base border rounded-md"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            required
+          >
+            <option value={1}>Mobile</option>
+            <option value={2}>Laptop</option>
+          </select>
         </span>
         <span>
           <Button type="submit">Create</Button>

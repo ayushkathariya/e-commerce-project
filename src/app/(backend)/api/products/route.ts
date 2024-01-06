@@ -82,12 +82,12 @@ export async function POST(request: NextRequest) {
       data: {
         title,
         description,
-        price,
-        quantity,
+        price: parseInt(price),
+        quantity: parseInt(quantity),
         image: cloudinaryImage.url,
         image_id: cloudinaryImage.public_id,
         category: {
-          connect: { id: category },
+          connect: { id: parseInt(category) },
         },
       },
     });

@@ -4,6 +4,8 @@ import "./globals.css";
 import ReduxProvider from "@/components/providers/redux-provider";
 import AuthProvider from "@/components/providers/auth-provider";
 import UserLayout from "@/components/user-layout";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +29,7 @@ export default function RootLayout({
               <div className="mt-5">{children}</div>
             </div>
           </ReduxProvider>
+          <ToastContainer autoClose={1000} />
         </AuthProvider>
       </body>
     </html>

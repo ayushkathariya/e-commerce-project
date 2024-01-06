@@ -7,6 +7,8 @@ import AdminLayout from "@/components/admin/admin-layout";
 import { getAuthSession } from "@/utils/auth";
 import { Role } from "@/utils/constants";
 import { redirect } from "next/navigation";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,6 +38,7 @@ export default async function RootLayout({
               <div className="mt-10 lg:ml-[21.5rem]">{children}</div>
             </div>
           </ReduxProvider>
+          <ToastContainer autoClose={1000} />
         </AuthProvider>
       </body>
     </html>
