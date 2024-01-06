@@ -1,7 +1,6 @@
 import Link from "next/link";
 import {
   ArchiveIcon,
-  BackpackIcon,
   GearIcon,
   PersonIcon,
   HomeIcon,
@@ -22,12 +21,6 @@ export default function SidebarLink() {
         <CommandItem className="cursor-pointer">
           <PersonIcon className="mr-2 h-4 w-4  lg:h-5 lg:w-5 lg:mr-3" />
           <span className="lg:text-lg font-medium">Users</span>
-        </CommandItem>
-      </Link>
-      <Link href={"/admin/orders"}>
-        <CommandItem className="cursor-pointer">
-          <BackpackIcon className="mr-2 h-4 w-4 lg:h-5 lg:w-5 lg:mr-3" />
-          <span className="lg:text-lg font-medium">Orders</span>
         </CommandItem>
       </Link>
       <Link href={"/admin/products"}>
