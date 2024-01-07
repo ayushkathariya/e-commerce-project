@@ -4,6 +4,7 @@ import { Button } from "./ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "@/redux/slices/cart-slice";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function CartCheckout() {
   const dispatch = useDispatch();
@@ -12,8 +13,13 @@ export default function CartCheckout() {
   cart.forEach((item: any) => (totalAmount += item.quantity * item.price));
   const isCartEmpty = cart.length === 0;
   const session = useSession();
+  const router = useRouter();
 
   const handleCheckout = async () => {
+    if (session?.status === "unauthenticated") {
+      router.push(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/signin`);
+    }
+
     try {
       const response = await fetch("/api/orders", {
         method: "POST",
