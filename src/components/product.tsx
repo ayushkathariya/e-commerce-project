@@ -23,7 +23,7 @@ export default function Product({ product }: ProductType) {
         <h1 className="inline-flex items-center text-lg font-semibold">
           {product.title}
         </h1>
-        <p className="mt-3 text-sm text-gray-600">{`Price: $ ${product.price}`}</p>
+        <p className="mt-3 text-sm text-gray-600">{`Price:  ₹ ${product.price}`}</p>
         <div className="mt-3 flex gap-3">
           <CartAddButon
             id={product.id}

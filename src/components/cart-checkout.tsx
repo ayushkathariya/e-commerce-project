@@ -3,6 +3,7 @@
 import { Button } from "./ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "@/redux/slices/cart-slice";
+import { useSession } from "next-auth/react";
 
 export default function CartCheckout() {
   const dispatch = useDispatch();
@@ -10,6 +11,39 @@ export default function CartCheckout() {
   let totalAmount = 0;
   cart.forEach((item: any) => (totalAmount += item.quantity * item.price));
   const isCartEmpty = cart.length === 0;
+  const session = useSession();
+
+  const handleCheckout = async () => {
+    try {
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        body: JSON.stringify({
+          return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success`,
+          website_url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+          amount: totalAmount * 100,
+          purchase_order_id: "test12",
+          purchase_order_name: "test",
+          customer_info: {
+            name: session?.data?.user.name,
+            email: session?.data?.user.email,
+            phone: "9804625081",
+          },
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      window.location.href = data.data.payment_url;
+    } catch (error) {
+      console.log("Error");
+    }
+  };
 
   return (
     <div className="mx-auto max-w-7xl px-2 lg:px-0">
@@ -121,7 +155,9 @@ export default function CartCheckout() {
                 </p>
               </div>
               <div className="flex space-x-4 mt-3">
-                <Button type="button">Checkout</Button>
+                <Button type="button" onClick={handleCheckout}>
+                  Checkout
+                </Button>
               </div>
             </section>
           </form>
