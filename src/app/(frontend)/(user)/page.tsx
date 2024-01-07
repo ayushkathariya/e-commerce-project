@@ -1,11 +1,12 @@
 import Product from "@/components/product";
+import { toast } from "react-toastify";
 
 const fetchProducts = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
-    method: "GET",
+    cache: "no-store",
   });
   if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    toast.error("Failed to fetch data");
   }
   const data = await res.json();
   return data.data;
